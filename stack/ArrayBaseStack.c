@@ -29,3 +29,12 @@ int StackSize(Stack *p)
 
     return p->top;
 }
+
+int IsEmpty(Stack *p)
+{
+
+    if (p->top == -1)
+        return TRUE;
+    else
+        return FALSE;
+}
