@@ -19,5 +19,6 @@ void StackPush(Stack *p, DataType data);
 void StackPop(Stack *p);
 DataType StackPeek(Stack *p);
 int StackSize(Stack *p);
+int IsEmpty(Stack *p);
 
 #endif
