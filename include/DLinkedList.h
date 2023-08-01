@@ -20,14 +20,14 @@ typedef struct _linkedList
     Node *curr;
     Node *prev;
     int numOfData;
-    int (*comp)(struct _linkedList *, int);
+    int (*comp)(int, int);
 
 } List;
 
 void ListInit(List *plist);
 void ListInsert(List *plist, DATA Ldata);
 void FInsert(List *plist, DATA Ldata); // head를 기준으로 즉, 앞부분에 노드를 추가하는 방식
-
+void SInsert(List *plist, DATA Ldata);
 /*
 리스트에 저장된 데이터를 조회하는 함수
 */
@@ -38,5 +38,7 @@ int LNext(List *plist, DATA *Ldata);  // 리스트의 다음 노드에 대한 �
 
 int LRemove(List *plist);
 int LCount(List *plist);
+
+void SetSortRule(List *plist, int (*comp)(int, int));
 
 #endif

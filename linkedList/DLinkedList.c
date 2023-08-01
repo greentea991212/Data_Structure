@@ -20,7 +20,8 @@ void ListInsert(List *plist, DATA Ldata)
     {
         FInsert(plist, Ldata);
     }
-    // else SInsert(plist, Ldata);
+    else
+        SInsert(plist, Ldata);
 }
 
 void FInsert(List *plist, DATA Ldata)
@@ -85,4 +86,36 @@ int LCount(List *plist)
 {
 
     return plist->numOfData;
+}
+
+void SetSortRule(List *plist, int (*comp)(int, int))
+{
+
+    plist->comp = comp;
+}
+
+void SInsert(List *plist, DATA Ldata)
+{
+
+    Node *newNode = (Node *)malloc(sizeof(Node));
+    newNode->data = Ldata;
+    newNode->next = NULL;
+
+    (plist->numOfData)++;
+
+    plist->curr = plist->head;
+
+    while (1)
+    {
+
+        if (plist->curr->next == NULL)
+            break;
+        if (plist->comp(newNode->data, plist->curr->next->data) == 0)
+            break;
+
+        plist->curr = plist->curr->next;
+    }
+
+    newNode->next = plist->curr->next;
+    plist->curr->next = newNode;
 }
