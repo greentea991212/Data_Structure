@@ -18,7 +18,7 @@ typedef struct _DBLinckedList
 {
 
     Node *head;
-    Node* tail;
+    Node *tail;
     Node *curr;
     int NumOfData;
 
@@ -29,7 +29,7 @@ void ListInsert(List *plist, Data pdata);
 int LFirst(List *plist, Data *pdata);
 int LNext(List *plist, Data *pdata);
 int LPrev(List *plist, Data *pdata);
-Data LRemove(List* plist);
+Data LRemove(List *plist);
 int LCount(List *plist);
 
 #endif

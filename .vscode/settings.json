@@ -1,6 +1,10 @@
 {
   "files.associations": {
-    "arraybasequeue.h": "c"
+    "arraybasequeue.h": "c",
+    "pointlinkedlist.h": "c",
+    "stdio.h": "c",
+    "stdlib.h": "c",
+    "usefulheap.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

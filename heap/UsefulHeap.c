@@ -53,8 +53,7 @@ void Insert(Heap *pheap, Data data)
             pheap->arr[insertIndex] = pheap->arr[parent];
             insertIndex = parent;
         }
-        else
-            break;
+        else break;
     }
 
     pheap->arr[insertIndex] = data;
