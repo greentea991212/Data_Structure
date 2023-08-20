@@ -8,6 +8,7 @@ typedef struct _node
     struct _node *left;
     struct _node *right;
     Data data;
+
 } BTreeNode;
 
 void (*vistFuctionPtr)(Data);
