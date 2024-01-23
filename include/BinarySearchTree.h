@@ -1,11 +1,11 @@
 #ifndef __BINARY_SEARCH_TREE_H__
 #define __BINARY_SEARCH_TREE_H__
 
-#include "BinaryTree2.h"
+#include "BinaryTree.h"
 
-void bstMakeAndInit(BTreeNode** rootNode);
-Data bstGetNodeData(BTreeNode* bst);
-void bstInsert(BTreeNode** rootNode, Data insertData);
-BTreeNode* bstSearch(BTreeNode* bst, Data target);
+void BstMakeAndInit(Node **rootNode);
+Data BstGetNodeData(Node *bst);
+void BstInsert(Node **rootNode, Data insertData);
+Node *BstSearch(Node *bst, Data target);
 
 #endif

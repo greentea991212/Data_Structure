@@ -2,60 +2,118 @@
 #include <stdlib.h>
 #include "../include/BinaryTree.h"
 
-BTreeNode *MakeNode()
+Node *MakeNode()
 {
 
-    BTreeNode *newNode = (BTreeNode *)malloc(sizeof(BTreeNode));
+    Node *newNode = (Node *)malloc(sizeof(Node));
+
     newNode->left = NULL;
     newNode->right = NULL;
+    newNode->data = 0;
 
     return newNode;
 }
 
-void setData(BTreeNode *node, Data pdata)
+void SetNodeData(Node *node, Data data)
 {
 
-    node->data = pdata;
+    node->data = data;
 }
 
-Data getData(BTreeNode *node)
+Data GetNodeData(Node *node)
 {
 
     return node->data;
 }
 
-BTreeNode *getLeftSubTree(BTreeNode *parentNode)
-{
-
-    return parentNode->left;
-}
-
-BTreeNode *getRightSubTree(BTreeNode *parentNode)
-{
-
-    return parentNode->right;
-}
-
-void setLeftSubTree(BTreeNode *parentNode, BTreeNode *nodeToAadd)
+void SetLeftSubTree(Node *parentNode, Node *childNode)
 {
 
     if (parentNode->left != NULL)
     {
-
+        /*
+            일단, 이미 어떠한 노드가 자리를 잡고있으면 삭제 후 삽입하기
+        */
         free(parentNode->left);
+        parentNode->left = NULL;
     }
-
-    parentNode->left = nodeToAadd;
+    parentNode->left = childNode;
 }
 
-void setRightSubTree(BTreeNode *parentNode, BTreeNode *nodeToAadd)
+void SetRightSubTree(Node *parentNode, Node *childNode)
 {
 
     if (parentNode->right != NULL)
     {
-
+        /*
+            일단, 이미 어떠한 노드가 자리를 잡고있으면 삭제 후 삽입하기
+        */
         free(parentNode->right);
+        parentNode->right = NULL;
     }
+    parentNode->right = childNode;
+}
 
-    parentNode->right = nodeToAadd;
+Node *GetLeftSubTree(Node *node)
+{
+
+    if (node->left != NULL)
+        return node->left;
+    else
+    {
+        printf("Empty %d's left\n", node->left);
+        return NULL;
+    }
+}
+Node *GetRightSubTree(Node *node)
+{
+
+    if (node->right != NULL)
+        return node->right;
+    else
+    {
+        printf("Empty %d's right\n", node->right);
+        return NULL;
+    }
+}
+void Preorder(Node *node)
+{
+
+    if (node == NULL)
+        return;
+
+    printf("%d ", node->data);
+    Preorder(node->left);
+    Preorder(node->right);
+}
+void Inorder(Node *node)
+{
+
+    if (node == NULL)
+        return;
+
+    Inorder(node->left);
+    printf("%d ", node->data);
+    Inorder(node->right);
+}
+void Postorder(Node *node)
+{
+    if (node == NULL)
+        return;
+    Postorder(node->left);
+    Postorder(node->right);
+    printf("%d ", node->data);
+}
+void DeleteAll(Node *node)
+{
+
+    if (node == NULL)
+        return;
+
+    DeleteAll(node->left);
+    DeleteAll(node->right);
+    printf("%d is deleted\n", node->data);
+    free(node);
+    node = NULL;
+    // printf("%p\n", node);
 }

@@ -23,7 +23,9 @@ int IsEmpty(Queue *Lqueue)
 
 void Enqueue(Queue *Lqueue, Data data)
 {
-
+    /*
+    데이터 삽입을 tail에 실시한다.
+    */
     Node *newNode = (Node *)malloc((sizeof(Node)));
     newNode->data = data;
     newNode->next = NULL;
@@ -46,7 +48,10 @@ void Enqueue(Queue *Lqueue, Data data)
 
 void Dequeue(Queue *Lqueue)
 {
-
+    /*
+    head를 기점으로 삭제를 한다.
+    head를 오른쪽으로 옮기면서 삭제한다.
+    */
     if (IsEmpty(Lqueue))
         return;
 

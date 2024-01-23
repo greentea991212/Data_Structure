@@ -5,7 +5,7 @@
 void HeapInint(Heap *pheap)
 {
 
-    pheap->numOfData = 0;
+    pheap->numOfData =
 }
 
 int IsEmpty(Heap *pheap)
