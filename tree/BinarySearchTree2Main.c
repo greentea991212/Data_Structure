@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "../include/BinarySearchTree2.h"
 
+// BinarySearchTree에 대한 ADT를 처음부터 구현한 코드이다.
+
 int main()
 {
 
