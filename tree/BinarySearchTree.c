@@ -15,7 +15,6 @@ Data BstGetNodeData(Node *bst)
 }
 void BstInsert(Node **rootNode, Data insertData)
 {
-
     Node *parentNode = NULL;
     Node *currentNode = NULL;
     Node *newNode = NULL;
@@ -56,11 +55,42 @@ void BstInsert(Node **rootNode, Data insertData)
         {
             SetRightSubTree(parentNode, newNode);
         }
-        else if (parentNode->data > insertDataP)
+        else if (parentNode->data > insertData)
         {
 
             SetLeftSubTree(parentNode, newNode);
         }
     }
 }
-Node *BstSearch(Node *bst, Data target);
+Node *BstSearch(Node *bst, Data target)
+{
+    if (bst == NULL)
+        return NULL;
+
+    Node *currentNode;
+
+    currentNode = bst;
+
+    while (currentNode != NULL)
+    {
+        if (currentNode->data < target)
+        {
+            // printf("Current : %d\n", currentNode->data);
+            currentNode = GetRightSubTree(currentNode);
+        }
+        else if (currentNode->data > target)
+        {
+            // printf("Current : %d\n", currentNode->data);
+
+            currentNode = GetLeftSubTree(currentNode);
+        }
+        else if (currentNode->data == target)
+            break;
+    }
+
+    if (currentNode != NULL)
+        return currentNode;
+
+    else
+        return NULL;
+}

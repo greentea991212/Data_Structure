@@ -5,38 +5,49 @@
 int main(void)
 {
 
-    BTreeNode *bstRoot;
-    BTreeNode *searchNode;
+    Node *rootNode;
+    Node *searchNode;
 
-    bstMakeAndInit(&bstRoot);
+    BstMakeAndInit(&rootNode);
 
-    bstInsert(&bstRoot, 9);
-    bstInsert(&bstRoot, 1);
-    bstInsert(&bstRoot, 6);
-    bstInsert(&bstRoot, 2);
-    bstInsert(&bstRoot, 8);
-    bstInsert(&bstRoot, 3);
-    bstInsert(&bstRoot, 5);
+    BstInsert(&rootNode, 3);
+    BstInsert(&rootNode, 1);
+    BstInsert(&rootNode, 6);
+    BstInsert(&rootNode, 2);
+    BstInsert(&rootNode, 5);
+    BstInsert(&rootNode, 9);
+    BstInsert(&rootNode, 8);
 
-    searchNode = bstSearch(bstRoot, 9);
-    if (searchNode == NULL)
-        printf("탐색실패\n");
-    else
-        printf("탐색에 성공한 키의 값: %d\n", bstGetNodeData(searchNode));
+    Inorder(rootNode);
+    printf("\n\n");
 
-    searchNode = bstSearch(bstRoot, 4);
+    searchNode = BstSearch(rootNode, 3);
+
     if (searchNode == NULL)
-        printf("탐색실패\n");
+        printf("탐색 실패\n");
     else
-        printf("탐색에 성공한 키의 값: %d\n", bstGetNodeData(searchNode));
-    searchNode = bstSearch(bstRoot, 6);
+        printf("%d 탐색완료\n", BstGetNodeData(searchNode));
+
+    searchNode = BstSearch(rootNode, 5);
+
     if (searchNode == NULL)
-        printf("탐색실패\n");
+        printf("탐색 실패\n");
     else
-        printf("탐색에 성공한 키의 값: %d\n", bstGetNodeData(searchNode));
-    searchNode = bstSearch(bstRoot, 7);
+        printf("%d 탐색완료\n", BstGetNodeData(searchNode));
+
+    searchNode = BstSearch(rootNode, 9);
+
     if (searchNode == NULL)
-        printf("탐색실패\n");
+        printf("탐색 실패\n");
     else
-        printf("탐색에 성공한 키의 값: %d\n", bstGetNodeData(searchNode));
+        printf("%d 탐색완료\n", BstGetNodeData(searchNode));
+
+    searchNode = BstSearch(rootNode, 6);
+
+    if (searchNode == NULL)
+        printf("탐색 실패\n");
+    else
+        printf("%d 탐색완료\n", BstGetNodeData(searchNode));
+
+    return 0;
 }
