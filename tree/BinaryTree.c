@@ -72,7 +72,7 @@ Node *GetRightSubTree(Node *node)
         return node->right;
     else
     {
-        printf("Empty %d's right\n", node->data);
+        // printf("Empty %d's right\n", node->data);
         return NULL;
     }
 }

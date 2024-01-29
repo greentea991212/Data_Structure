@@ -55,11 +55,11 @@ void BstInsert(Node **rootNode, Data insertData)
     if (parentNode != NULL) // 부모노드가 NULL이라는 것은 곧 트리가 비어있다는 사실과 같다.
     {
 
-        if (parentNode->data < insertData)
+        if (GetNodeData(parentNode) < insertData)
         {
             SetRightSubTree(parentNode, newNode);
         }
-        else if (parentNode->data > insertData)
+        else if (GetNodeData(parentNode) > insertData)
         {
 
             SetLeftSubTree(parentNode, newNode);
@@ -82,18 +82,17 @@ Node *BstSearch(Node *bst, Data target)
 
     while (currentNode != NULL)
     {
-        if (currentNode->data < target)
+        if (GetNodeData(currentNode) < target)
         {
             // printf("Current : %d\n", currentNode->data);
             currentNode = GetRightSubTree(currentNode);
         }
-        else if (currentNode->data > target)
+        else if (GetNodeData(currentNode) > target)
         {
             // printf("Current : %d\n", currentNode->data);
-
             currentNode = GetLeftSubTree(currentNode);
         }
-        else if (currentNode->data == target)
+        else if (GetNodeData(currentNode) == target)
             break;
     }
 
@@ -107,7 +106,7 @@ Node *BstSearch(Node *bst, Data target)
 Node *BstRemove(Node **rootNode, Data target)
 {
     Node *virtualRoot = MakeNode(); // 더미노드 생성. 이는 루트노드의 부모역할을 하게 한다.
-    Node *parentNode;
+    Node *parentNode;               // 삭제할 부모노드
     Node *currentNode;
     Node *delNode;
 
@@ -135,7 +134,7 @@ Node *BstRemove(Node **rootNode, Data target)
     delNode = currentNode;
 
     // 조건1: 삭제할 노드가 leaf노드 일때.
-    if (GetLeftSubTree(delNode) == NULL && GetRightSubTree(delNode))
+    if (GetLeftSubTree(delNode) == NULL && GetRightSubTree(delNode) == NULL)
     {
 
         if (delNode == GetLeftSubTree(parentNode))
@@ -151,7 +150,7 @@ Node *BstRemove(Node **rootNode, Data target)
 
         // 새로 연결할 노드의 위치가 어딘지 탐색한다.
         if (GetLeftSubTree(delNode) != NULL)
-            childeOfDelNode = GetLeftSubTree(delNode);
+            childOfDelNode = GetLeftSubTree(delNode);
         else
             childOfDelNode = GetRightSubTree(delNode);
 
@@ -161,7 +160,46 @@ Node *BstRemove(Node **rootNode, Data target)
             ChangeLeftSubTree(parentNode, childOfDelNode);
         else
             ChangeRightSubTree(parentNode, childOfDelNode);
-    }
 
+        printf("%d\n", delNode->data);
+    }
     // 조건3: 삭제할 노드의 자식노드가 2개 일때.
+    else
+    {
+
+        Data delData;
+        Node *replacementNode;         // 대체할 노드
+        Node *parentNodeOfReplacement; // 대체할 부모의 노드
+
+        replacementNode = GetRightSubTree(delNode);
+        parentNodeOfReplacement = delNode;
+
+        while (GetLeftSubTree(replacementNode) != NULL)
+        {
+
+            parentNodeOfReplacement = replacementNode;
+            replacementNode = GetLeftSubTree(replacementNode);
+        }
+
+        // 삭제할 노드의 데이터를 대체할 노드의 데이터로 바꾼다.
+        delData = GetNodeData(delNode);
+        SetNodeData(delNode, replacementNode->data);
+
+        if (GetLeftSubTree(parentNodeOfReplacement) == replacementNode)
+        { // 대체할 노드가 왼쪽에 있는 경우
+
+            ChangeLeftSubTree(parentNodeOfReplacement, GetRightSubTree(replacementNode));
+        }
+        else
+        {
+            // 대체할 노드가 오른쪽에 있는 경우
+            ChangeRightSubTree(parentNodeOfReplacement, GetRightSubTree(replacementNode));
+        }
+
+        delNode = replacementNode;
+        SetNodeData(delNode, delData);
+    }
+    if (GetRightSubTree(virtualRoot) != *rootNode)
+        *rootNode = GetRightSubTree(virtualRoot); // 루트노드가 항상 유지해야된다.
+    return delNode;
 }

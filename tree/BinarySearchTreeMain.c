@@ -10,44 +10,61 @@ int main(void)
 
     BstMakeAndInit(&rootNode);
 
-    BstInsert(&rootNode, 3);
+    BstInsert(&rootNode, 5);
+    BstInsert(&rootNode, 8);
     BstInsert(&rootNode, 1);
     BstInsert(&rootNode, 6);
-    BstInsert(&rootNode, 2);
-    BstInsert(&rootNode, 5);
+    BstInsert(&rootNode, 4);
     BstInsert(&rootNode, 9);
-    BstInsert(&rootNode, 8);
+    BstInsert(&rootNode, 3);
+    BstInsert(&rootNode, 2);
+    BstInsert(&rootNode, 7);
 
     Inorder(rootNode);
     printf("\n\n");
 
-    searchNode = BstSearch(rootNode, 3);
+    searchNode = BstRemove(&rootNode, 3);
 
-    if (searchNode == NULL)
-        printf("Å½»ö½ÇÆÐ\n");
-    else
-        printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
+    Inorder(rootNode);
+    printf("\n\n");
 
-    searchNode = BstSearch(rootNode, 5);
+    searchNode = BstRemove(&rootNode, 8);
 
-    if (searchNode == NULL)
-        printf("Å½»ö½ÇÆÐ\n");
-    else
-        printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
+    Inorder(rootNode);
+    printf("\n\n");
 
-    searchNode = BstSearch(rootNode, 9);
+    searchNode = BstRemove(&rootNode, 1);
+    Inorder(rootNode);
+    printf("\n\n");
 
-    if (searchNode == NULL)
-        printf("Å½»ö½ÇÆÐ\n");
-    else
-        printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
+    searchNode = BstRemove(&rootNode, 6);
+    Inorder(rootNode);
+    printf("\n\n");
+    // if (searchNode == NULL)
+    //     printf("Å½»ö½ÇÆÐ\n");
+    // else
+    //     printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
 
-    searchNode = BstSearch(rootNode, 6);
+    // searchNode = BstSearch(rootNode, 5);
 
-    if (searchNode == NULL)
-        printf("Å½»ö½ÇÆÐ\n");
-    else
-        printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
+    // if (searchNode == NULL)
+    //     printf("Å½»ö½ÇÆÐ\n");
+    // else
+    //     printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
+
+    // searchNode = BstSearch(rootNode, 9);
+
+    // if (searchNode == NULL)
+    //     printf("Å½»ö½ÇÆÐ\n");
+    // else
+    //     printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
+
+    // searchNode = BstSearch(rootNode, 6);
+
+    // if (searchNode == NULL)
+    //     printf("Å½»ö½ÇÆÐ\n");
+    // else
+    //     printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
 
     return 0;
 }
