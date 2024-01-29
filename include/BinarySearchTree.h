@@ -7,5 +7,6 @@ void BstMakeAndInit(Node **rootNode);
 Data BstGetNodeData(Node *bst);
 void BstInsert(Node **rootNode, Data insertData);
 Node *BstSearch(Node *bst, Data target);
+Node *BstRemove(Node **rootNode, Data target);
 
 #endif

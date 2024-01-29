@@ -117,3 +117,41 @@ void DeleteAll(Node *node)
     node = NULL;
     // printf("%p\n", node);
 }
+
+Node *RemoveLeftSubTree(Node *parentNode)
+{
+
+    Node *delNode;
+
+    if (parentNode == NULL)
+        return NULL;
+
+    delNode = parentNode->left;
+    parentNode->left = NULL;
+
+    return delNode;
+}
+
+Node *RemoveRightSubTree(Node *parentNode)
+{
+
+    Node *delNode;
+    if (parentNode == NULL)
+        return NULL;
+    delNode = parentNode->right;
+    parentNode->right = NULL;
+
+    return delNode;
+}
+
+// 메모리 소멸을 수반하지 않고, 왼쪽 서브트리를 수정한다.
+void ChangeLeftSubTree(Node *parentNode, Node *sub)
+{
+    parentNode->left = sub;
+}
+// 메모리 소멸을 수반하지 않고, 오른쪽 서브트리를 수정한다.
+void ChangeRightSubTree(Node *parentNode, Node *sub)
+{
+
+    parentNode->right = sub;
+}

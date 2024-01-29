@@ -24,28 +24,28 @@ int main(void)
     searchNode = BstSearch(rootNode, 3);
 
     if (searchNode == NULL)
-        printf("Å½»ö ½ÇÆÐ\n");
+        printf("Å½»ö½ÇÆÐ\n");
     else
-        printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
+        printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
 
     searchNode = BstSearch(rootNode, 5);
 
     if (searchNode == NULL)
-        printf("Å½»ö ½ÇÆÐ\n");
+        printf("Å½»ö½ÇÆÐ\n");
     else
-        printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
+        printf("%d Å½»ö¿Ï·á!\n", BstGetNodeData(searchNode));
 
     searchNode = BstSearch(rootNode, 9);
 
     if (searchNode == NULL)
-        printf("Å½»ö ½ÇÆÐ\n");
+        printf("Å½»ö½ÇÆÐ\n");
     else
         printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
 
     searchNode = BstSearch(rootNode, 6);
 
     if (searchNode == NULL)
-        printf("Å½»ö ½ÇÆÐ\n");
+        printf("Å½»ö½ÇÆÐ\n");
     else
         printf("%d Å½»ö¿Ï·á\n", BstGetNodeData(searchNode));
 

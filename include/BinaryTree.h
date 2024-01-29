@@ -27,4 +27,10 @@ void Postorder(Node *node);
 
 void DeleteAll(Node *node);
 
+Node *RemoveLeftSubTree(Node *parentNode);  // 현재 노드의 왼쪽 서브트리를 삭제한다. 삭제한 주소값을 반환한다.
+Node *RemoveRightSubTree(Node *parentNode); // 현재 노드의 오른 쪽 서브트리를 삭제한다. 삭제한 주소값을 반환한다.
+
+void ChangeLeftSubTree(Node *parentNode, Node *sub);
+void ChangeRightSubTree(Node *parentNode, Node *sub);
+
 #endif

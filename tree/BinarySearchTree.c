@@ -67,7 +67,7 @@ void BstInsert(Node **rootNode, Data insertData)
     }
     else
     {
-        *rootNode = newNode;
+        *rootNode = newNode; // 메인에서 rootNode = newNode;와 동일하게 된다(이중 포인터에 의해)
     }
 }
 //}
@@ -102,4 +102,66 @@ Node *BstSearch(Node *bst, Data target)
 
     else
         return NULL;
+}
+
+Node *BstRemove(Node **rootNode, Data target)
+{
+    Node *virtualRoot = MakeNode(); // 더미노드 생성. 이는 루트노드의 부모역할을 하게 한다.
+    Node *parentNode;
+    Node *currentNode;
+    Node *delNode;
+
+    ChangeRightSubTree(virtualRoot, *rootNode); // 더미노드의 오른쪽에, 루트로 하여금 기존 트리 연결
+
+    parentNode = virtualRoot;
+    currentNode = *rootNode;
+
+    while (currentNode != NULL && GetNodeData(currentNode) != target)
+    {
+
+        parentNode = currentNode;
+        if (target < GetNodeData(currentNode))
+        {
+
+            currentNode = GetLeftSubTree(currentNode);
+        }
+        else
+            currentNode = GetRightSubTree(currentNode);
+    }
+
+    if (currentNode == NULL)
+        return NULL;
+
+    delNode = currentNode;
+
+    // 조건1: 삭제할 노드가 leaf노드 일때.
+    if (GetLeftSubTree(delNode) == NULL && GetRightSubTree(delNode))
+    {
+
+        if (delNode == GetLeftSubTree(parentNode))
+            RemoveLeftSubTree(parentNode);
+        else
+            RemoveRightSubTree(parentNode);
+    }
+    // 조건2: 삭제할 노드의 자식 노드가 1개 일때.
+    else if (GetLeftSubTree(delNode) == NULL || GetRightSubTree(delNode) == NULL)
+    {
+
+        Node *childOfDelNode;
+
+        // 새로 연결할 노드의 위치가 어딘지 탐색한다.
+        if (GetLeftSubTree(delNode) != NULL)
+            childeOfDelNode = GetLeftSubTree(delNode);
+        else
+            childOfDelNode = GetRightSubTree(delNode);
+
+        // 삭제할 데이터가 부모노드의 왼쪽인지 오른쪽인지 탐색한다.
+
+        if (GetLeftSubTree(parentNode) == delNode)
+            ChangeLeftSubTree(parentNode, childOfDelNode);
+        else
+            ChangeRightSubTree(parentNode, childOfDelNode);
+    }
+
+    // 조건3: 삭제할 노드의 자식노드가 2개 일때.
 }
