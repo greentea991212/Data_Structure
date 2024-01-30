@@ -11,35 +11,36 @@ int main(void)
     BstMakeAndInit(&rootNode);
 
     BstInsert(&rootNode, 5);
-    BstInsert(&rootNode, 8);
+    // BstInsert(&rootNode, 8);
     BstInsert(&rootNode, 1);
-    BstInsert(&rootNode, 6);
-    BstInsert(&rootNode, 4);
-    BstInsert(&rootNode, 9);
-    BstInsert(&rootNode, 3);
-    BstInsert(&rootNode, 2);
-    BstInsert(&rootNode, 7);
+    // BstInsert(&rootNode, 6);
+    // BstInsert(&rootNode, 4);
+    // BstInsert(&rootNode, 9);
+    // BstInsert(&rootNode, 3);
+    // BstInsert(&rootNode, 2);
+    // BstInsert(&rootNode, 7);
 
     Inorder(rootNode);
     printf("\n\n");
 
-    searchNode = BstRemove(&rootNode, 3);
+    // searchNode = BstRemove(&rootNode, 3);
 
+    // Inorder(rootNode);
+    // printf("\n\n");
+
+    // searchNode = BstRemove(&rootNode, 8);
+
+    // Inorder(rootNode);
+    // printf("\n\n");
+
+    searchNode = BstRemove(&rootNode, 5);
     Inorder(rootNode);
     printf("\n\n");
 
-    searchNode = BstRemove(&rootNode, 8);
-
-    Inorder(rootNode);
+    // searchNode = BstRemove(&rootNode, 6);
+    // Inorder(rootNode);
     printf("\n\n");
-
-    searchNode = BstRemove(&rootNode, 1);
-    Inorder(rootNode);
-    printf("\n\n");
-
-    searchNode = BstRemove(&rootNode, 6);
-    Inorder(rootNode);
-    printf("\n\n");
+    printf("root : %d", rootNode->data);
     // if (searchNode == NULL)
     //     printf("Å½»ö½ÇÆÐ\n");
     // else

@@ -45,70 +45,80 @@ Node *GetRightChildNode(Node *parentNode)
     else
         return parentNode->right;
 }
+
+void SetLeftChildNode(Node *parentNode, Node *node)
+{
+
+    if (parentNode == NULL)
+        return;
+
+    parentNode->left = node;
+}
+void SetRightChildNode(Node *parentNode, Node *node)
+{
+    if (parentNode == NULL)
+        return;
+
+    parentNode->right = node;
+}
 void Insert(Tree *bst, int data)
 {
+    Node *parentNode = NULL; // Å½»öÇÏ°íÀÚ ÇÏ´Â ³ëµåÀÇ ºÎ¸ğ³ëµå¸¦ °¡¸£Å²´Ù.
     Node *currentNode = NULL;
-    Node *parentNode = NULL;
-    Node *newNode = NULL;
-
-    if (bst->root == NULL)
+    Node *newNode;
+    // ÀÌ¹Ì ÀÌÁøÅ½»öÆ®¸®°¡ °®ÃçÁø °æ¿ì
+    currentNode = bst->root;    // ·çÆ®³ëµå¿¡¼­ ºÎÅÍ ¼³Á¤ÇÏ¿© Å½»öÀ» ½ÃÀÛÇÑ´Ù.
+    while (currentNode != NULL) // NULLÀ» ¸¸³¯¶§ ±îÁö Å½»öÀ» ÇÑ´Ù. ¿Ö³ÄÇÏ¸é, Å©±â ºñ±³ ¿¬»êÀ» ÅëÇØ ºñ¾îÀÖ´Â (NULL)°÷ÀÌ »ğÀÔÇÒ À§Ä¡ÀÌ±â ¶§¹®ÀÌ´Ù.
     {
+        parentNode = currentNode;             // ºÎ¸ğ³ëµå¸¦ ÇöÀç ³ëµå¿¡ À§ÀÓÇÑ´Ù.
+        if (GetNodeData(currentNode) == data) // ÀÌÁøÅ½»öÆ®¸®´Â Å°°ª¿¡ ´ëÇÑ Áßº¹À» Çã¿ëÇÏÁö ¾Ê´Â´Ù.
+            return;
+        if (GetNodeData(currentNode) > data)
+        {
 
-        newNode = MakeTreeNode();
-        SetNodeData(newNode, data);
+            currentNode = GetLeftChildNode(currentNode);
+        }
+        else
+            currentNode = GetRightChildNode(currentNode);
+    }
+    newNode = MakeTreeNode();
+    SetNodeData(newNode, data);
+    if (parentNode == NULL)
+    { // parentNode°¡ NULLÀÌ¶ó´Â °ÍÀº, ÇöÀç »ğÀÔÇÒ µ¥ÀÌÅÍ°¡ Æ®¸®ÀÇ Ã¹ ³ëµå¶ó´Â °ÍÀÌ´Ù.
+
         bst->root = newNode;
-        return;
     }
     else
     {
-        currentNode = bst->root;
-        while (currentNode != NULL)
-        { // íŠ¹ì • ë…¸ë“œê°€ ì‚½ì…ë˜ì•¼ë  ê·œì¹™ì— ë”°ë¼ ë¹„ì–´ìˆëŠ” ê³³ì´ ê³§ ì‚½ì…ë˜ì–´ì•¼ í•  ìœ„ì¹˜ì´ë‹¤.
-            parentNode = currentNode;
-            if (GetNodeData(currentNode) == data)
-                return;
-            if (GetNodeData(currentNode) > data)
-            {
-                currentNode = GetLeftChildNode(currentNode);
-            }
-            else if (GetNodeData(currentNode) < data)
-            {
-                currentNode = GetRightChildNode(currentNode);
-            }
-        }
-    }
-
-    if (parentNode != NULL)
-    {
-
-        newNode = MakeTreeNode();
-        SetNodeData(newNode, data);
         if (GetNodeData(parentNode) > data)
-        {
-            parentNode->left = newNode;
-        }
-        else if (GetNodeData(parentNode) < data)
-        {
-            parentNode->right = newNode;
-        }
+            SetLeftChildNode(parentNode, newNode);
         else
-            return;
+            SetRightChildNode(parentNode, newNode);
     }
+
+    return;
 }
-
-Node *Search(Tree *bst, int target)
+void Remove(Tree *bst, int target)
 {
-
+    Node *virtualRootNode = MakeTreeNode();
+    Node *parentNode = NULL;              // »èÁ¦ÇÒ ³ëµåÀÇ ºÎ¸ğ³ëµå
+    Node *currentNode = NULL;             // »èÁ¦ÇÒ ³ëµå(ÇöÀç³ëµå)
+    Node *replacementNode = NULL;         // ´ëÃ¼ÇÒ ³ëµå
+    Node *parentOfReplacementNode = NULL; // ´ëÃ¼ÇÒ ³ëµåÀÇ ºÎ¸ğ³ëµå
+    Node *delNode = NULL;
     if (bst->root == NULL)
-        return NULL;
+        return;
 
-    Node *currentNode = bst->root;
-    while (currentNode != NULL)
+    SetRightChildNode(virtualRootNode, bst->root); // °¡»ó·çÆ®³ëµåÀÇ ¿À¸¥ÂÊ ÀÚ½ÄÀ¸·Î ·çÆ®³ëµå¸¦ ¼³Á¤ÇÑ´Ù.
+    // »èÁ¦ÇÒ ³ëµå°¡ ¾îµğÀÖ´ÂÁö Ã£¾Æ³½´Ù.
+    printf("?\n");
+    parentNode = virtualRootNode;
+    currentNode = bst->root;
+    printf("currentNode : %d\n", currentNode->data);
+    while (currentNode != NULL && GetNodeData(currentNode) != target)
     {
-
-        if (GetNodeData(currentNode) == target)
-            break;
-        else if (GetNodeData(currentNode) > target)
+        parentNode = currentNode;
+        if (GetNodeData(currentNode) > target)
         {
 
             currentNode = GetLeftChildNode(currentNode);
@@ -118,14 +128,90 @@ Node *Search(Tree *bst, int target)
 
             currentNode = GetRightChildNode(currentNode);
         }
+        printf("?\n");
+    }
+    if (currentNode == NULL)
+        return;
+
+    delNode = currentNode;
+    // Á¶°Ç1. »èÁ¦ÇÒ ³ëµå°¡ ´Ü¸»³ëµåÀÎ °æ¿ì (Áï, ±×¾î¶°ÇÑ ÀÚ½Ä ³ëµå°¡ ¾ø´Â °æ¿ì)
+    if (GetLeftChildNode(delNode) == NULL && GetRightChildNode(delNode) == NULL)
+    {
+        if (GetLeftChildNode(parentNode) == delNode)
+        {
+            parentNode->left = NULL;
+        }
+        else
+        {
+            parentNode->right = NULL;
+        }
+    }
+    // Á¶°Ç2. »èÁ¦ÇÒ ³ëµåÀÇ ÀÚ½Ä³ëµå°¡ ÇÏ³ªÀÎ °æ¿ì
+    else if (GetLeftChildNode(delNode) == NULL || GetRightChildNode(delNode) == NULL)
+    {
+        Node *childOfDelNode;
+        // »èÁ¦ÇÒ ³ëµå ÀÇ ÀÚ½Ä³ëµå°¡ ¿ŞÂÊ¿¡ ÀÖ´ÂÁö, ¿À¸¥ÂÊ¿¡ ÀÖ´ÂÁö Å½»öÇØ¾ßÇÑ´Ù.
+        // ¸¸¾à ¿ŞÂÊ¿¡ ÀÖ´Ù¸é, »èÁ¦ÇÒ ³ëµåÀÇ ÀÚ½ÄÀ» »èÁ¦ÇÒ ³ëµåÀÇ ºÎ¸ğ ¿ŞÂÊ¿¡ ¿¬°á
+
+        if (GetLeftChildNode(delNode) != NULL)
+        {
+
+            childOfDelNode = GetLeftChildNode(delNode);
+        }
+        else
+        {
+
+            childOfDelNode = GetRightChildNode(delNode);
+        }
+        if (GetLeftChildNode(parentNode) == delNode)
+        {
+            parentNode->left = childOfDelNode;
+        }
+        else
+        {
+
+            parentNode->right = childOfDelNode;
+        }
+    }
+    // Á¶°Ç3. »èÁ¦ÇÒ ³ëµåÀÇ ÀÚ½Ä³ëµå°¡ µÎ°³ÀÎ °æ¿ì
+    else
+    {
+        parentOfReplacementNode = delNode;
+        replacementNode = GetRightChildNode(delNode);
+
+        while (GetLeftChildNode(replacementNode) != NULL)
+        {
+            parentOfReplacementNode = replacementNode;
+            replacementNode = GetLeftChildNode(replacementNode);
+        }
+
+        SetNodeData(delNode, replacementNode->data);
+
+        if (GetLeftChildNode(parentOfReplacementNode) == replacementNode)
+        {
+            parentOfReplacementNode->left = GetRightChildNode(replacementNode);
+        }
+        else
+        {
+            parentOfReplacementNode->right = GetRightChildNode(replacementNode);
+        }
     }
 
-    if (currentNode != NULL)
-        return currentNode;
-    else
-        return NULL;
-}
+    if (virtualRootNode->right != bst->root)
+    {
 
+        bst->root = virtualRootNode->right;
+    }
+
+    return;
+    /*
+    1. ·çÆ®¿¡¼­ ºÎÅÍ »èÁ¦ÇÒ ³ëµå¸¦ Å½»öÇÑ´Ù.
+    2. »èÁ¦ÇÒ ³ëµå¿¡ ´ëÇØ ´ëÃ¼ÇÒ ³ëµå¸¦ Å½»öÇÑ´Ù.
+    2-1. ´ëÃ¼ÇÒ ³ëµå´Â ¿À¸¥ÂÊ ¼­ºêÆ®¸®¿¡¼­ °¡Àå ÀÛÀº ³ëµå¸¦ Ã¤ÅÃÇÑ´Ù.
+    3. ´ëÃ¼ÇÒ ³ëµåÀÇ µ¥ÀÌÅÍ¸¦ »èÁ¦ÇÒ ³ëµå¿¡ ´ëÀÔÇÏ°í, »èÁ¦ÇÑ ÀÚ½Ä³ëµå¿Í »èÁ¦ÇÑ ºÎ¸ğ³ë¸¦ ¿¬°áÇÑ´Ù.
+    À§ ¼¼°¡Áö »çÇ×ÀÌ ±âº»ÀûÀÎ ¸ÅÄ¿´ÏÁòÀÌ´Ù.
+    */
+}
 void Preorder(Node *node)
 {
     if (node == NULL)

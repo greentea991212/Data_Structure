@@ -161,7 +161,7 @@ Node *BstRemove(Node **rootNode, Data target)
         else
             ChangeRightSubTree(parentNode, childOfDelNode);
 
-        printf("%d\n", delNode->data);
+        //printf("%d\n", delNode->data);
     }
     // 조건3: 삭제할 노드의 자식노드가 2개 일때.
     else
@@ -201,5 +201,6 @@ Node *BstRemove(Node **rootNode, Data target)
     }
     if (GetRightSubTree(virtualRoot) != *rootNode)
         *rootNode = GetRightSubTree(virtualRoot); // 루트노드가 항상 유지해야된다.
+    free(virtualRoot);
     return delNode;
 }

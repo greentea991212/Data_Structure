@@ -10,16 +10,37 @@ int main()
     Tree bst;
     BinarySearchTreeInit(&bst);
 
-    Insert(&bst, 3);
+    Insert(&bst, 5);
+    Insert(&bst, 8);
     Insert(&bst, 1);
     Insert(&bst, 6);
-    Insert(&bst, 2);
-    Insert(&bst, 5);
+    Insert(&bst, 4);
     Insert(&bst, 9);
-    Insert(&bst, 8);
+    Insert(&bst, 3);
+    Insert(&bst, 2);
+    Insert(&bst, 7);
 
-    printf("Tree's root : %d\n", bst.root->data);
     Inorder(bst.root);
+    printf("\n\n");
+    printf("Tree's  Root: %d\n", bst.root->data);
+
+    Remove(&bst, 5);
+
+    Inorder(bst.root);
+    printf("\n\n");
+
+    Remove(&bst, 8);
+
+    Inorder(bst.root);
+    printf("\n\n");
+
+    Remove(&bst, 1);
+    Inorder(bst.root);
+    printf("\n\n");
+
+    Remove(&bst, 6);
+    Inorder(bst.root);
+    printf("root : %d\n\n", bst.root->data);
 
     return 0;
 }
