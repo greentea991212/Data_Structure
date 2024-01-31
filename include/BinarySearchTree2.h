@@ -21,12 +21,15 @@ int GetNodeData(Node *node);
 
 Node *GetLeftChildNode(Node *parentNode);
 Node *GetRightChildNode(Node *parentNode);
+void SetLeftChildNode(Node *parentNode, Node *node);
+void SetRightChildNode(Node *parentNode, Node *node);
 
 void Insert(Tree *bst, int data);
 Node *Search(Tree *bst, int target);
+void Remove(Tree *bst, int target);
 
-void Preorder(Node* node);
-void Inorder(Node* node);
-void Postorder(Node* node);
+void Preorder(Node *node);
+void Inorder(Node *node);
+void Postorder(Node *node);
 
 #endif
