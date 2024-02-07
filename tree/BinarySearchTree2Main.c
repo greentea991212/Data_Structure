@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include "../include/BinarySearchTree2.h"
 
-// BinarySearchTreeì— ëŒ€í•œ ADTë¥¼ ì²˜ìŒë¶€í„° êµ¬í˜„í•œ ì½”ë“œì´ë‹¤.
+// BinarySearchTree¿¡ ´ëÇÑ ADT¸¦ Ã³À½ºÎÅÍ ±¸ÇöÇÑ ÄÚµåÀÌ´Ù.
 
 int main()
 {
 
     Tree bst;
+    Node *searchNode;
     BinarySearchTreeInit(&bst);
 
     Insert(&bst, 5);
@@ -20,9 +21,23 @@ int main()
     Insert(&bst, 2);
     Insert(&bst, 7);
 
+    searchNode = Search(&bst, 1);
+    if (searchNode != NULL)
+    {
+        printf("Å½»ö ¼º°ø : %d\n", searchNode->data);
+    }
+    searchNode = Search(&bst, 5);
+    if (searchNode != NULL)
+    {
+        printf("Å½»ö ¼º°ø : %d\n", searchNode->data);
+    }
+    searchNode = Search(&bst, 9);
+    if (searchNode != NULL)
+    {
+        printf("Å½»ö ¼º°ø : %d\n", searchNode->data);
+    }
     Inorder(bst.root);
     printf("\n\n");
-    printf("Tree's  Root: %d\n", bst.root->data);
 
     Remove(&bst, 5);
 
@@ -40,7 +55,7 @@ int main()
 
     Remove(&bst, 6);
     Inorder(bst.root);
-    printf("root : %d\n\n", bst.root->data);
+    printf("\n\n");
 
     return 0;
 }

@@ -13,30 +13,14 @@ int main()
     Insert(&heap, 'D');
     Insert(&heap, 'C');
 
-    for (int i = 1; i <= heap.numOfData; i++)
-    {
-
-        printf("%c ", heap.arr[i]);
-    }
-    printf("\n\n");
+    ShowAllElement(&heap);
     Delete(&heap);
-    for (int i = 1; i <= heap.numOfData; i++)
-    {
+    ShowAllElement(&heap);
 
-        printf("%c ", heap.arr[i]);
-    }
-    printf("\n\n");
     Delete(&heap);
-    for (int i = 1; i <= heap.numOfData; i++)
-    {
+    ShowAllElement(&heap);
 
-        printf("%c ", heap.arr[i]);
-    }
-    printf("\n\n");
     Delete(&heap);
-    for (int i = 1; i <= heap.numOfData; i++)
-    {
-
-        printf("%c ", heap.arr[i]);
-    }
+    ShowAllElement(&heap);
+    return 0;
 }

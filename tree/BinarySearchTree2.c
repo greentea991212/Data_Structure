@@ -98,6 +98,28 @@ void Insert(Tree *bst, int data)
 
     return;
 }
+
+Node *Search(Tree *bst, int target)
+{
+
+    if (bst->root == NULL)
+        return NULL;
+
+    Node *currentNode = bst->root;
+
+    while (currentNode != NULL && GetNodeData(currentNode) != target)
+    {
+        if (GetNodeData(currentNode) > target)
+            currentNode = GetLeftChildNode(currentNode);
+        else
+            currentNode = GetRightChildNode(currentNode);
+    }
+
+    if (currentNode == NULL)
+        return NULL;
+    else
+        return currentNode;
+}
 void Remove(Tree *bst, int target)
 {
     Node *virtualRootNode = MakeTreeNode();
@@ -111,10 +133,10 @@ void Remove(Tree *bst, int target)
 
     SetRightChildNode(virtualRootNode, bst->root); // 가상루트노드의 오른쪽 자식으로 루트노드를 설정한다.
     // 삭제할 노드가 어디있는지 찾아낸다.
-    printf("?\n");
+
     parentNode = virtualRootNode;
     currentNode = bst->root;
-    printf("currentNode : %d\n", currentNode->data);
+
     while (currentNode != NULL && GetNodeData(currentNode) != target)
     {
         parentNode = currentNode;
@@ -128,7 +150,6 @@ void Remove(Tree *bst, int target)
 
             currentNode = GetRightChildNode(currentNode);
         }
-        printf("?\n");
     }
     if (currentNode == NULL)
         return;
@@ -197,7 +218,7 @@ void Remove(Tree *bst, int target)
         }
     }
 
-    if (virtualRootNode->right != bst->root)
+    if (GetRightChildNode(virtualRootNode) != bst->root)
     {
 
         bst->root = virtualRootNode->right;

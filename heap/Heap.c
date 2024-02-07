@@ -1,3 +1,6 @@
+/*
+해당 코드는 MinHeap을 기준으로 작성되었다.
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/Heap.h"
@@ -102,12 +105,21 @@ Element Delete(Heap *heap)
         heap->arr[currentIndex] = heap->arr[GetPriorityChild(heap, currentIndex)];
         if (currentIndex = GetPriorityChild(heap, currentIndex)) // currentIndex를 갱신함과 동시에, 0이되면 멈추게 한다.
             break;
-        // printf("current idx : %d\n", currentIndex);
-        // printf("numOf Data : %d\n", heap->numOfData);
     }
 
     heap->arr[currentIndex] = lastElemnt;
     heap->numOfData--;
 
     return delData;
+}
+
+void ShowAllElement(Heap *heap)
+{
+
+    for (int i = 1; i <= heap->numOfData; i++)
+    {
+
+        printf("%c ", heap->arr[i].data);
+    }
+    printf("\n\n");
 }
