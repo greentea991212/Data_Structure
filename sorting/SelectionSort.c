@@ -28,7 +28,7 @@ void SelectionSort(int *arr, int len)
 
     for (int i = 0; i < len - 1; i++)
     {
-        minIndex = i;
+        minIndex = i; // 현재 위치에 저장될 인덱스 설정
 
         for (int j = i + 1; j < len; j++)
         {
